@@ -16,7 +16,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "test": "node --test --test-reporter=spec 'test/*.test.js'",
+    "test": "node --test --test-reporter=spec",
     "smoke": "node ./src/cli.js pack ./examples/notes --out ./tmp/notes.zix.html",
     "lint": "node -e \"console.log('no linter configured; relying on tests')\""
   },
